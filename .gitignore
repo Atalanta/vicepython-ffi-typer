@@ -1,0 +1,42 @@
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Build artifacts (when packaging)
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.hypothesis/
+.coverage
+htmlcov/
+coverage.xml
+
+# Type checking
+.mypy_cache/
+
+# Linting
+.ruff_cache/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Claude Code artifacts
+.claude/
+plan.md
+CLAUDE.md
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
