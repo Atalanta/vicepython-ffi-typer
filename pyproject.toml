@@ -10,7 +10,7 @@ dependencies = [
 authors = []
 
 [tool.uv.sources]
-vicepython-core = { path = "../vicepython-core", editable = true }
+vicepython-core = { git = "https://github.com/Atalanta/vicepython-core.git" }
 
 [project.optional-dependencies]
 dev = [
