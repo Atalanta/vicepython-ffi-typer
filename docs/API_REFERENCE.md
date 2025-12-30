@@ -31,6 +31,7 @@ TypedTyper(
     *,
     help: str = "",
     no_args_is_help: bool = False,
+    require_subcommand: bool = False,
 ) -> TypedTyper
 ```
 
@@ -40,6 +41,7 @@ TypedTyper(
 |------|------|---------|-------------|
 | `help` | `str` | `""` | Application help text shown with `--help` |
 | `no_args_is_help` | `bool` | `False` | Show help when invoked without arguments |
+| `require_subcommand` | `bool` | `False` | Force group behavior for single-command apps. When `True`, forces `no_args_is_help=True` and registers internal callback to ensure subcommand-first invocation semantics |
 
 **Example:**
 
