@@ -46,12 +46,22 @@ if __name__ == "__main__":
 
 ### How-To Guides (Task-Oriented)
 
-**[User Guide](./docs/USER_GUIDE.md)** — Solve specific problems:
-- Create error types
-- Handle optional parameters
-- Test commands
-- Build multi-command apps
-- Use Typer features directly
+Core tasks:
+- **[Create error types](./docs/how-to-create-error-types.md)** — Define typed errors with user-facing messages
+- **[Build multi-command apps](./docs/how-to-build-multi-command-apps.md)** — Create CLIs with multiple subcommands
+- **[Test successful commands](./docs/how-to-test-successful-commands.md)** — Verify exit codes and output
+- **[Test failing commands](./docs/how-to-test-failing-commands.md)** — Verify error handling
+
+Parameters and options:
+- **[Handle optional parameters](./docs/how-to-handle-optional-parameters.md)** — Convert `None` to `Option[T]`
+- **[Use boolean flags](./docs/how-to-use-boolean-flags.md)** — Add `--flag` options
+- **[Handle file paths](./docs/how-to-handle-file-paths.md)** — Accept and validate paths
+- **[Add help text](./docs/how-to-add-help-text.md)** — Document commands and parameters
+
+Advanced:
+- **[Require explicit subcommands](./docs/how-to-require-subcommands.md)** — Force group behavior for single-command apps
+- **[Use Typer features directly](./docs/how-to-use-typer-features.md)** — Prompts, confirmation, progress bars
+- **[Exit with custom codes](./docs/how-to-exit-with-custom-codes.md)** — Non-standard exit codes
 
 ### Reference (Information-Oriented)
 
