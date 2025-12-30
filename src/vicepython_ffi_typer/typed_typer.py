@@ -31,11 +31,31 @@ class TypedTyper:
         *,
         help: str = "",
         no_args_is_help: bool = False,
+        require_subcommand: bool = False,
     ) -> None:
+        """Initialize a TypedTyper app.
+
+        Args:
+            help: Help text for the app
+            no_args_is_help: Show help when no args provided
+            require_subcommand: Force group behavior even for single-command apps.
+                When True, no_args_is_help is forced to True, and an internal
+                callback is registered to ensure the app behaves like a group
+                (requiring explicit subcommand invocation).
+        """
+        self._require_subcommand = require_subcommand
+        effective_no_args_is_help = require_subcommand or no_args_is_help
+
         self._app: Any = _typer.Typer(
             help=help,
-            no_args_is_help=no_args_is_help,
+            no_args_is_help=effective_no_args_is_help,
         )
+
+        if self._require_subcommand:
+            @self._app.callback()
+            def _vp_internal_callback() -> None:
+                """Internal callback to force group behavior. Do not use directly."""
+                pass
 
     def command(
         self,

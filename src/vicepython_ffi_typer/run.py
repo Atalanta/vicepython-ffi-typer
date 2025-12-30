@@ -14,6 +14,8 @@ Contract (Posture A - Strict VicePython):
 
 import sys
 
+from click.exceptions import NoArgsIsHelpError
+
 from ._internal import _CommandError
 from .typed_typer import Exit, TypedTyper
 
@@ -41,7 +43,7 @@ def run(app: TypedTyper, argv: list[str]) -> int:
     MUST NOT print errors or call sys.exit - they return Result[None, E] instead.
 
     Exit Code Semantics:
-        0: Command handler returned Ok(None)
+        0: Command handler returned Ok(None), or help was displayed
         1: Command handler returned Err(e) - prints str(e) to stderr
         2: Unexpected exception or ANY SystemExit - prints generic bug message to stderr
         N: typer.Exit(N) was raised by framework (e.g., --help) - returns N
@@ -50,6 +52,7 @@ def run(app: TypedTyper, argv: list[str]) -> int:
         - Command handlers calling sys.exit() is a BUG (treated as exit 2)
         - ALL SystemExit instances are bugs - no exceptions
         - Only Typer's Exit (RuntimeError subclass) is respected for exit codes
+        - Click's NoArgsIsHelpError (when no_args_is_help=True) returns 0
         - standalone_mode=False prevents Typer from calling sys.exit()
 
     Args:
@@ -95,6 +98,8 @@ def run(app: TypedTyper, argv: list[str]) -> int:
         return 1
     except Exit as e:
         return _exit_code_from_exit(e)
+    except NoArgsIsHelpError:
+        return 0
     except SystemExit:
         print("Unexpected error (bug): SystemExit", file=sys.stderr)
         return 2
